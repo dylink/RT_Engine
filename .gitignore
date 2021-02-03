@@ -1,4 +1,5 @@
 *.user
 .vs/
 x64/
-results/*
+
+
