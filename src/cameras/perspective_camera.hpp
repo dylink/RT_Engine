@@ -21,7 +21,11 @@ namespace RT_ISICG
 		inline Ray generateRay( const float p_sx, const float p_sy ) const override
 		{
 			/// TODO !
-			return Ray( Vec3f( 0.f ), Vec3f( 0.f, 0.f, 1.f ) );
+			Vec3f coord = _viewportTopLeftCorner + _viewportU * p_sx - _viewportV * p_sy;
+			Vec3f dir = coord - _position;
+			dir	= glm::normalize( dir );
+			
+			return Ray( _position, dir );
 		}
 
 	  private:

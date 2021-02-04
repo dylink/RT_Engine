@@ -26,8 +26,8 @@ namespace RT_ISICG
 		_viewportV = _v * (h * 2);
 		float l	   = ( h * 2 ) * _aspectRatio;
 		_viewportU = _u * l;
-		//_viewportTopLeftCorner = 
-		printf( "%f\n", h );
+		_viewportTopLeftCorner = -_w * _focalDistance + _viewportV * .5f - _viewportU * .5f;
+		printf( "(%f, %f, %f)\n", _viewportTopLeftCorner.x, _viewportTopLeftCorner.y, _viewportTopLeftCorner.z );
 		/// TODO ! _viewportTopLeftCorner ?	_viewportU ? _viewportV ?
 	}
 
