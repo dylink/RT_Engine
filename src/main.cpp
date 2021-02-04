@@ -3,7 +3,7 @@
 #include "renderer.hpp"
 
 namespace RT_ISICG
-{
+{ 
 	int main( int argc, char ** argv )
 	{
 		const int imgWidth	= 600;
