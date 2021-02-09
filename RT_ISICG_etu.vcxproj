@@ -172,6 +172,7 @@
     <ClInclude Include="src\texture.hpp" />
     <ClInclude Include="src\utils\chrono.hpp" />
     <ClInclude Include="src\utils\console_progress_bar.hpp" />
+    <ClInclude Include="src\utils\random.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

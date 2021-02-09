@@ -151,5 +151,8 @@
     <ClInclude Include="src\lights\light_sample.hpp">
       <Filter>Header Files\lights</Filter>
     </ClInclude>
+    <ClInclude Include="src\utils\random.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

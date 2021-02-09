@@ -41,16 +41,30 @@ namespace RT_ISICG
 
 		progressBar.start( height, 50 );
 		chrono.start();
-
+		setNbPixelSamples(4);
 		for ( int j = 0; j < height; j++ )
 		{
 			for ( int i = 0; i < width; i++ )
 			{
-				Ray	ray = p_camera->generateRay( (float)i / width, (float)j / height );
+
+				Vec3f color( 0.f, 0.f, 0.f );
+				for (int g = 0; g < _nbPixelSamples; g++) {
+					
+					float x = ((float)i+ randomFloat()) / (width-1);
+					float y = ((float)j+ randomFloat()) / (height-1);
+					Ray	  ray = p_camera->generateRay( x, y );
+					color += _integrator->Li( p_scene, ray, 0, 50000 );
+					
+				}
+
+				color /= _nbPixelSamples;
+				p_texture.setPixel( i, j, color );
+				//Ray	ray = p_camera->generateRay( (float)i / width, (float)j / height );
+				//p_texture.setPixel( i, j, _integrator->Li( p_scene, ray, 0, 50000 ) );
 				//_integrator->Li( p_scene, ray, 0, 50000);
 				//Vec3f color( (float)i / width, (float)j / height, 0. );
 				
-				p_texture.setPixel( i, j, _integrator->Li( p_scene, ray, 0, 50000));
+				//p_texture.setPixel( i, j, _integrator->Li( p_scene, ray, 0, 50000));
 				/// TODO !
 			}
 			progressBar.next();
