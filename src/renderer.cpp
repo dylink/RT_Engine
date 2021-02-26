@@ -1,5 +1,6 @@
 #include "renderer.hpp"
 #include "integrators/ray_cast_integrator.hpp"
+#include "integrators/direct_light_integrator.hpp"
 #include "utils/console_progress_bar.hpp"
 #include "utils/random.hpp"
 
@@ -19,6 +20,9 @@ namespace RT_ISICG
 			_integrator = new RayCastIntegrator();
 			break;
 		}
+		case IntegratorType::DIRECT_LIGHT:
+			_integrator = new DirectLightIntegrator();
+			break;
 		}
 	}
 
@@ -41,24 +45,32 @@ namespace RT_ISICG
 
 		progressBar.start( height, 50 );
 		chrono.start();
-		setNbPixelSamples(4);
+		
 		for ( int j = 0; j < height; j++ )
 		{
 			for ( int i = 0; i < width; i++ )
 			{
 
-				Vec3f color( 0.f, 0.f, 0.f );
-				for (int g = 0; g < _nbPixelSamples; g++) {
-					
-					float x = ((float)i+ randomFloat()) / (width-1);
-					float y = ((float)j+ randomFloat()) / (height-1);
-					Ray	  ray = p_camera->generateRay( x, y );
-					color += _integrator->Li( p_scene, ray, 0, 50000 );
-					
+				if (_nbPixelSamples > 1) {
+					Vec3f color( 0.f, 0.f, 0.f );
+					for ( int g = 0; g < _nbPixelSamples; g++ )
+					{
+						float x	  = ( (float)i + randomFloat() ) / ( width - 1 );
+						float y	  = ( (float)j + randomFloat() ) / ( height - 1 );
+						Ray	  ray = p_camera->generateRay( x, y );
+						color += _integrator->Li( p_scene, ray, 0, 50000 );
+					}
+					color /= _nbPixelSamples;
+					p_texture.setPixel( i, j, color );
 				}
+				else
+				{
+					Ray ray = p_camera->generateRay( (float)i / width, (float)j / height );
+					p_texture.setPixel( i, j, _integrator->Li( p_scene, ray, 0, 50000 ) );
+				}
+				
 
-				color /= _nbPixelSamples;
-				p_texture.setPixel( i, j, color );
+				
 				//Ray	ray = p_camera->generateRay( (float)i / width, (float)j / height );
 				//p_texture.setPixel( i, j, _integrator->Li( p_scene, ray, 0, 50000 ) );
 				//_integrator->Li( p_scene, ray, 0, 50000);
