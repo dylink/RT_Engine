@@ -151,6 +151,7 @@
     <ClCompile Include="src\utils\console_progress_bar.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\brdfs\lambert_brdf.hpp" />
     <ClInclude Include="src\cameras\base_camera.hpp" />
     <ClInclude Include="src\cameras\perspective_camera.hpp" />
     <ClInclude Include="src\geometry\base_geometry.hpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="src\defines.hpp" />
     <ClInclude Include="src\io\stb_include.hpp" />
     <ClInclude Include="src\materials\base_material.hpp" />
+    <ClInclude Include="src\materials\lambert_material.hpp" />
     <ClInclude Include="src\objects\base_object.hpp" />
     <ClInclude Include="src\objects\sphere.hpp" />
     <ClInclude Include="src\ray.hpp" />

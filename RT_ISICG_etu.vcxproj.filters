@@ -57,6 +57,9 @@
     <Filter Include="Source Files\geometry">
       <UniqueIdentifier>{618845aa-171b-4533-b6e5-ff84a164de78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\brdfs">
+      <UniqueIdentifier>{051f0f37-5291-419b-af5c-d992cda5fe44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -150,6 +153,12 @@
     </ClInclude>
     <ClInclude Include="src\lights\light_sample.hpp">
       <Filter>Header Files\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\brdfs\lambert_brdf.hpp">
+      <Filter>Header Files\brdfs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\materials\lambert_material.hpp">
+      <Filter>Header Files\materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
