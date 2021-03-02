@@ -15,7 +15,13 @@ namespace RT_ISICG
 
 		// Return incoming luminance.
 		Vec3f Li( const Scene & p_scene, const Ray & p_ray, const float p_tMin, const float p_tMax ) const override;
+
+		private:
+
+			float _nbLightSamples = 32;
 	};
+
+
 
 } // namespace RT_ISICG
 

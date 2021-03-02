@@ -48,6 +48,7 @@ namespace RT_ISICG
 		
 		for ( int j = 0; j < height; j++ )
 		{
+			#pragma omp parallel for
 			for ( int i = 0; i < width; i++ )
 			{
 
@@ -61,12 +62,12 @@ namespace RT_ISICG
 						color += _integrator->Li( p_scene, ray, 0, 50000 );
 					}
 					color /= _nbPixelSamples;
-					p_texture.setPixel( i, j, color );
+					p_texture.setPixel( i, j, glm::clamp(color, 0.f, 1.f) );
 				}
 				else
 				{
 					Ray ray = p_camera->generateRay( (float)i / width, (float)j / height );
-					p_texture.setPixel( i, j, _integrator->Li( p_scene, ray, 0, 50000 ) );
+					p_texture.setPixel( i, j, glm::clamp(_integrator->Li( p_scene, ray, 0, 50000 ), 0.f, 1.f) );
 				}
 				
 
