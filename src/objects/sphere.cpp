@@ -31,6 +31,7 @@ namespace RT_ISICG
 		if ( _geometry.intersect( p_ray, t1, t2 ) )
 		{
 			if ( t1 > p_tMax ) { return false; } // first intersection too far
+			if ( t1 < p_tMin ) { t1 = t2; }		 // first intersection too near, check second one
 			if ( t1 < p_tMin || t1 > p_tMax ) { return false; }
 
 			return true;

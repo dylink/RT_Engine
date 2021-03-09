@@ -28,7 +28,7 @@ namespace RT_ISICG
 			
 			float distance	= glm::distance( p_point, randomPos );
 			Vec3f direction = normalize( randomPos - p_point );
-			float pdf		= 1 / _area * ( distance * distance ) * glm::dot(direction, _normal ); 
+			float pdf		= (1 / _area) * ( distance * distance ) * glm::dot(direction, _normal ); 
 			Vec3f radiance	= _color * _power / pdf;
 			
 			return LightSample( direction, distance, radiance, pdf );

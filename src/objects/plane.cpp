@@ -23,7 +23,8 @@ namespace RT_ISICG
 	bool Plane::intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const
 	{
 		float t1;
-		return _geometry.intersect( p_ray, t1 );
+		_geometry.intersect( p_ray, t1 );
+		return t1 > p_tMin && t1 < p_tMax;
 	}
 
 } // namespace RT_ISICG

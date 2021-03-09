@@ -22,7 +22,7 @@ namespace RT_ISICG
 						LightSample light = i->sample( hitRecord._point );
 						Ray shadow( hitRecord._point, light._direction );
 						shadow.offset( hitRecord._normal );
-						if ( !p_scene.intersectAny( shadow, 0.f, light._distance - SHADOW_EPSILON ) )
+						if ( !p_scene.intersectAny( shadow, p_tMin, light._distance - SHADOW_EPSILON ) )
 						{
 							lContrib += hitRecord._object->getMaterial()->getFlatColor() * light._radiance
 								  * glm::max( 0.f, glm::dot( light._direction, hitRecord._normal ) );
@@ -35,7 +35,7 @@ namespace RT_ISICG
 					LightSample light = i->sample( hitRecord._point );
 					Ray		  shadow( hitRecord._point, light._direction );
 					shadow.offset( hitRecord._normal );
-					if ( !p_scene.intersectAny( shadow, 0.f, light._distance - SHADOW_EPSILON ) )
+					if ( !p_scene.intersectAny( shadow, p_tMin, light._distance - SHADOW_EPSILON ) )
 					{
 						lContrib += hitRecord._object->getMaterial()->getFlatColor() * light._radiance
 							  * glm::max( 0.f, glm::dot( light._direction, hitRecord._normal ) );

@@ -31,10 +31,10 @@ namespace RT_ISICG
 		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
 
 		// Add materials.
-		_addMaterial( new ColorMaterial( "Blue", BLUE ) );
+		_addMaterial( new ColorMaterial( "Grey", GREY ) );
 
 		// Link objects and materials.
-		_attachMaterialToObject( "Blue", "Sphere1" );
+		_attachMaterialToObject( "Grey", "Sphere1" );
 
 		_addObject( new Plane( "Plane1", Vec3f( 0, -2, 0 ), Vec3f( 0, 1, 0 ) ) );
 
@@ -42,9 +42,9 @@ namespace RT_ISICG
 
 		_attachMaterialToObject( "Red", "Plane1" );
 
-		//_addLight( new PointLight( Vec3f( 1, 1, 1 ), 100.f, Vec3f( 1, 10, 1 ) ) );
+		_addLight( new PointLight( Vec3f( 1, 1, 1 ), 60.f, Vec3f( 0, 0, -2 ) ) );
 
-		_addLight( new QuadLight( Vec3f( 1, 1, 1 ), 20.f, Vec3f( 1, 10, 2 ), Vec3f( -2, 0, 0 ), Vec3f( 0, 0, 2 ) ) );
+		//_addLight( new QuadLight( Vec3f( 1, 1, 1 ), 20.f, Vec3f( 1, 10, 2 ), Vec3f( -2, 0, 0 ), Vec3f( 0, 0, 2 ) ) );
 	}
 
 	bool Scene::intersect( const Ray & p_ray, const float p_tMin, const float p_tMax, HitRecord & p_hitRecord ) const
