@@ -16,31 +16,18 @@ namespace RT_ISICG
 			Vec3f li = BLACK;
 			for ( auto i : p_scene.getLights() ) {		
 				Vec3f lContrib = BLACK;
-				if (i->getIsSurface()) { 
-					//std::cout << "YEEEEEEES\n";
-					for (int j = 0; j < _nbLightSamples; j++) {
-						LightSample light = i->sample( hitRecord._point );
-						Ray shadow( hitRecord._point, light._direction );
-						shadow.offset( hitRecord._normal );
-						if ( !p_scene.intersectAny( shadow, p_tMin, light._distance - SHADOW_EPSILON ) )
-						{
-							lContrib += hitRecord._object->getMaterial()->getFlatColor() * light._radiance
-								  * glm::max( 0.f, glm::dot( light._direction, hitRecord._normal ) );
-						}
-					}
-					lContrib /= _nbLightSamples;
-				}
-				else
-				{
+				int nbLightSamples = i->getIsSurface() ? _nbLightSamples : 1;
+				for (int j = 0; j < nbLightSamples; j++) {
 					LightSample light = i->sample( hitRecord._point );
-					Ray		  shadow( hitRecord._point, light._direction );
+					Ray shadow( hitRecord._point, light._direction );
 					shadow.offset( hitRecord._normal );
 					if ( !p_scene.intersectAny( shadow, p_tMin, light._distance - SHADOW_EPSILON ) )
 					{
-						lContrib += hitRecord._object->getMaterial()->getFlatColor() * light._radiance
-							  * glm::max( 0.f, glm::dot( light._direction, hitRecord._normal ) );
+						lContrib += hitRecord._object->getMaterial()->shade(p_ray, hitRecord, light) * light._radiance
+								* glm::max( 0.f, glm::dot( light._direction, hitRecord._normal ) );
 					}
 				}
+				lContrib /= nbLightSamples;
 				
 				li += lContrib;
 				

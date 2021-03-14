@@ -57,6 +57,9 @@
     <Filter Include="Header Files\io\lights">
       <UniqueIdentifier>{57201a0d-2142-4af6-b776-6263f4d8e83a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\brdfs">
+      <UniqueIdentifier>{a92b8278-2fb4-4366-a6e9-19e2f6f103c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -177,6 +180,18 @@
     </ClInclude>
     <ClInclude Include="src\lights\quad_light.hpp">
       <Filter>Header Files\io\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\brdfs\lambert_brdf.hpp">
+      <Filter>Header Files\brdfs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\materials\lambert_material.hpp">
+      <Filter>Header Files\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="src\materials\matte_material.hpp">
+      <Filter>Header Files\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="src\brdfs\oren_nayar_brdf.hpp">
+      <Filter>Header Files\brdfs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
