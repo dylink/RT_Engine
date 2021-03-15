@@ -20,7 +20,6 @@ namespace RT_ISICG
 		_w = glm::normalize( p_position - p_lookAt );
 		_u = glm::normalize( cross( p_up, _w ) );
 		_v = glm::normalize( cross( _w, _u ) );
-		printf( "Vec (%f, %f, %f)\n", _w.x, _w.y, _w.z );
 		_updateViewport();
 	}
 
@@ -31,7 +30,6 @@ namespace RT_ISICG
 		float l	   = ( h * 2 ) * _aspectRatio;
 		_viewportU = _u * l;
 		_viewportTopLeftCorner = -_w * _focalDistance + _viewportV * .5f - _viewportU * .5f;
-		printf( "(%f, %f, %f)\n", _viewportTopLeftCorner.x, _viewportTopLeftCorner.y, _viewportTopLeftCorner.z );
 		/// TODO ! _viewportTopLeftCorner ?	_viewportU ? _viewportV ?
 	}
 

@@ -193,5 +193,17 @@
     <ClInclude Include="src\brdfs\oren_nayar_brdf.hpp">
       <Filter>Header Files\brdfs</Filter>
     </ClInclude>
+    <ClInclude Include="src\materials\plastic_material.hpp">
+      <Filter>Header Files\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="src\brdfs\phong_brdf.hpp">
+      <Filter>Header Files\brdfs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\materials\microfacet_material.hpp">
+      <Filter>Header Files\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="src\brdfs\microfacet_brdf.hpp">
+      <Filter>Header Files\brdfs</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,8 @@
 #include "materials/color_material.hpp"
 #include "materials/lambert_material.hpp"
 #include "materials/matte_material.hpp"
+#include "materials/plastic_material.hpp"
+#include "materials/microfacet_material.hpp"
 #include "objects/sphere.hpp"
 #include "objects/plane.hpp"
 #include "lights/point_light.hpp"
@@ -9,6 +11,7 @@
 
 namespace RT_ISICG
 {
+	//Vec3f( 1, 0.85, 0.57 )
 	Scene::Scene() { _addMaterial( new ColorMaterial( "default", WHITE ) ); }
 
 	Scene::~Scene()
@@ -33,10 +36,10 @@ namespace RT_ISICG
 		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
 
 		// Add materials.
-		_addMaterial( new MatteMaterial( "Grey", GREY, 0.6 ) );
+		_addMaterial( new MicrofacetMaterial( "Gold", Vec3f(1,0.85,0.57), 0.3, 0.5 ));
 
 		// Link objects and materials.
-		_attachMaterialToObject( "Grey", "Sphere1" );
+		_attachMaterialToObject( "Gold", "Sphere1" );
 
 		_addObject( new Plane( "Plane1", Vec3f( 0, -2, 0 ), Vec3f( 0, 1, 0 ) ) );
 

@@ -10,7 +10,6 @@ namespace RT_ISICG
 		HitRecord hitRecord;
 		
 		
-		//std::cout << p_scene.getLights()[0]->getPower() << "\n";
 		if ( p_scene.intersect( p_ray, p_tMin, p_tMax, hitRecord ) )
 		{
 			Vec3f li = BLACK;

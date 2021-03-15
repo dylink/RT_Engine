@@ -2,9 +2,6 @@
 #define __RT_ISICG_BRDF_OREN_NAYAR__
 
 #include "defines.hpp"
-#include "hit_record.hpp"
-#include "lights/light_sample.hpp"
-#include "ray.hpp"
 
 namespace RT_ISICG
 {
@@ -27,12 +24,12 @@ namespace RT_ISICG
 			const float theta_i		= glm::acos( cos_theta_i );
 
 			const float cos_phi_diff
-				= glm::dot( glm::normalize( wO - normal * cos_theta_r ), glm::normalize( wI - normal * cos_theta_i ) );
+				= glm::dot(wO - normal * cos_theta_r , wI - normal * cos_theta_i );
 
 			const float alpha = glm::max( theta_i, theta_r );
 			const float beta  = glm::min( theta_i, theta_r );
 
-			float b = cos_phi_diff < 0 ? _b * glm::sin( alpha ) * glm::tan( beta ) : 0.f;
+			float b = cos_phi_diff >= 0 ? _b * cos_phi_diff * glm::sin( alpha ) * glm::tan( beta ) : 0.f;
 			return _kd * INV_PIf
 				   * ( _a + b );
 		}
