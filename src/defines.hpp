@@ -23,6 +23,8 @@ namespace RT_ISICG
 
 	const float SHADOW_EPSILON = 0.001f;
 
+	using uint = unsigned int;
+
 	// Vectors.
 	using Vec2i = glm::ivec2;
 	using Vec3i = glm::ivec3;
@@ -58,6 +60,7 @@ namespace RT_ISICG
 
 	// Paths.
 	const std::string RESULTS_PATH = "results/";
+	const std::string DATA_PATH	   = "data/";
 
 	// Utils.
 	static inline float intAsFloat( const int p_i )
