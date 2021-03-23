@@ -13,7 +13,7 @@ namespace RT_ISICG
 		// * INV_PIf : could be done in the constructor...
 		inline Vec3f evaluate( const Vec3f & wO, const Vec3f & normal, const Vec3f & wI ) const
 		{
-			const float cosA = glm::dot( -wO, glm::reflect( -wO, normal ) );
+			const float cosA = glm::dot( wO, glm::reflect( -wI, normal ) );
 			Vec3f		h	  = glm::normalize( wO + wI );
 			const float cosA2 = glm::dot( normal, h );
 			return _ks * pow(cosA2, _coeff);

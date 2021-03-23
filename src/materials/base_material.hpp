@@ -22,8 +22,17 @@ namespace RT_ISICG
 
 		virtual const std::string & getName() const final { return _name; }
 
+		inline const bool & isMirror() const { return _isMirror; }
+
+		inline const bool & isTransparent() const { return _isTransparent; }
+
+		inline const float & getIOR() const { return _ior; }
+
 	  protected:
 		std::string _name;
+		bool		_isMirror = false;
+		bool		_isTransparent = false;
+		float		_ior		   = 1;
 	};
 
 } // namespace RT_ISICG

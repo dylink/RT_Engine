@@ -4,12 +4,15 @@ namespace RT_ISICG
 {
 	bool PlaneGeometry::intersect( const Ray & p_ray, float & p_t) const
 	{
-		/// TODO !
-		float d = dot( _normal, p_ray.getDirection() );
-		p_t		= dot( ( _point - p_ray.getOrigin() ), _normal ) / dot( p_ray.getDirection(), _normal );
-		if (d < 0) return true;
 
-		return false;
+		float		_d	= -dot( _point, _normal );
+		const float den = glm::dot( p_ray.getDirection(), _normal );
+		if ( den == 0.f ) return false;
+
+		p_t = -( glm::dot( p_ray.getOrigin(), _normal ) + _d ) / den;
+
+		return true;
+		/// TODO !
 	}
 
 } // namespace RT_ISICG

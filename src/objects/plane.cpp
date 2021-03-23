@@ -8,6 +8,7 @@ namespace RT_ISICG
 		if ( _geometry.intersect( p_ray, t1) )
 		{
 
+			if ( t1 < p_tMin || t1 > p_tMax ) { return false; }
 			// Intersection found, fill p_hitRecord.
 			p_hitRecord._point = p_ray.pointAtT( t1 );
 			p_hitRecord._normal = _geometry.getNormal();

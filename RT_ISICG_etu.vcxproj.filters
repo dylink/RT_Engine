@@ -54,11 +54,11 @@
     <Filter Include="Source Files\geometry">
       <UniqueIdentifier>{618845aa-171b-4533-b6e5-ff84a164de78}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\io\lights">
-      <UniqueIdentifier>{57201a0d-2142-4af6-b776-6263f4d8e83a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\brdfs">
       <UniqueIdentifier>{a92b8278-2fb4-4366-a6e9-19e2f6f103c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\lights">
+      <UniqueIdentifier>{57201a0d-2142-4af6-b776-6263f4d8e83a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +104,9 @@
     <ClCompile Include="src\integrators\direct_light_integrator.cpp">
       <Filter>Source Files\integrators</Filter>
     </ClCompile>
+    <ClCompile Include="src\integrators\whitted_integrator.cpp">
+      <Filter>Source Files\integrators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\defines.hpp">
@@ -128,7 +131,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\lights\base_light.hpp">
-      <Filter>Header Files\io\lights</Filter>
+      <Filter>Header Files\lights</Filter>
     </ClInclude>
     <ClInclude Include="src\integrators\ray_cast_integrator.hpp">
       <Filter>Header Files\integrators</Filter>
@@ -167,7 +170,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\lights\light_sample.hpp">
-      <Filter>Header Files\io\lights</Filter>
+      <Filter>Header Files\lights</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\random.hpp">
       <Filter>Header Files\utils</Filter>
@@ -176,10 +179,10 @@
       <Filter>Header Files\geometry</Filter>
     </ClInclude>
     <ClInclude Include="src\lights\point_light.hpp">
-      <Filter>Header Files\io\lights</Filter>
+      <Filter>Header Files\lights</Filter>
     </ClInclude>
     <ClInclude Include="src\lights\quad_light.hpp">
-      <Filter>Header Files\io\lights</Filter>
+      <Filter>Header Files\lights</Filter>
     </ClInclude>
     <ClInclude Include="src\brdfs\lambert_brdf.hpp">
       <Filter>Header Files\brdfs</Filter>
@@ -204,6 +207,15 @@
     </ClInclude>
     <ClInclude Include="src\brdfs\microfacet_brdf.hpp">
       <Filter>Header Files\brdfs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\integrators\whitted_integrator.hpp">
+      <Filter>Header Files\integrators</Filter>
+    </ClInclude>
+    <ClInclude Include="src\materials\mirror_material.hpp">
+      <Filter>Header Files\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="src\materials\transparent_material.hpp">
+      <Filter>Header Files\materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
