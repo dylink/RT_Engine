@@ -89,6 +89,18 @@
     <ClCompile Include="src\integrators\ray_cast_integrator.cpp">
       <Filter>Source Files\integrators</Filter>
     </ClCompile>
+    <ClCompile Include="src\geometry\triangle_mesh_geometry.cpp">
+      <Filter>Source Files\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\triangle_mesh.cpp">
+      <Filter>Source Files\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\aabb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bvh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\defines.hpp">
@@ -159,6 +171,18 @@
     </ClInclude>
     <ClInclude Include="src\materials\lambert_material.hpp">
       <Filter>Header Files\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\triangle_mesh_geometry.hpp">
+      <Filter>Header Files\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\triangle_mesh.hpp">
+      <Filter>Header Files\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\aabb.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bvh.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
