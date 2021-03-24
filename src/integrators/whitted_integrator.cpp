@@ -110,7 +110,8 @@ namespace RT_ISICG
 					= glm::refract( p_ray.getDirection(), hitRecord._normal, ior );
 				Ray refract( hitRecord._point, direction2 );
 				refract.offset( -hitRecord._normal );
-				Vec3f refractedColor = recurs( p_scene, refract, p_tMin, p_tMax, nbBounce + 1, !isIn );
+				Vec3f refractedColor = (direction2 == BLACK) ? BLACK : recurs( p_scene, refract, p_tMin, p_tMax, nbBounce + 1, !isIn );
+				//Vec3f refractedColor = recurs( p_scene, refract, p_tMin, p_tMax, nbBounce + 1, !isIn );
 				float cosThetaI		 = glm::dot( p_ray.getDirection(), hitRecord._normal );
 				float cosThetaT		 = glm::dot( direction2, hitRecord._normal );
 				float rS			 = pow( ( n1 * cosThetaI - n2 * cosThetaT ) / ( n1 * cosThetaI + n2 * cosThetaT ), 2.f);

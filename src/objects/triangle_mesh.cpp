@@ -14,7 +14,11 @@ namespace RT_ISICG
 			float t;
 			if ( _triangles[ i ].intersect( p_ray, t ) )
 			{
-				if ( t >= p_tMin && t <= tClosest ) { tClosest = t; }
+				if ( t >= p_tMin && t <= tClosest )
+				{
+					tClosest = t;
+					hitTri	 = i;
+				}
 			}
 		}
 		if ( hitTri != _triangles.size() ) // Intersection found.
