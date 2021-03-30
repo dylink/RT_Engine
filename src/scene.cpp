@@ -111,7 +111,7 @@ namespace RT_ISICG
 		// Add objects .
 		// ================================================================
 		// OBJ.
-		loadFileTriangleMesh( "UVsphere", DATA_PATH + "uvsphere.obj" );
+		loadFileTriangleMesh( "UVsphere", DATA_PATH + "bunny.obj" );
 		_attachMaterialToObject( " CyanMatte ", "UVsphere_defaultobject" );
 		// Pseudo Cornell box made with infinite planes .
 		_addObject( new Plane( " PlaneGround ", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
