@@ -52,7 +52,7 @@ namespace RT_ISICG
 		
 		for ( int j = 0; j < height; j++ )
 		{
-			#pragma omp parallel for
+			#pragma omp parallel for schedule(dynamic)
 			for ( int i = 0; i < width; i++ )
 			{
 
