@@ -1,6 +1,7 @@
 #include "bvh.hpp"
 #include "geometry/triangle_mesh_geometry.hpp"
 #include "utils/chrono.hpp"
+#include <algorithm>
 
 namespace RT_ISICG
 {
@@ -40,6 +41,11 @@ namespace RT_ISICG
 						 const uint p_lastTriangleId,
 						 const uint p_depth )
 	{
+		if ( !( p_depth >= _maxDepth ) ) { 
+			uint axePartition = p_node->_aabb.largestAxis();
+			uint milieu	   = p_node->_aabb.getMax()[ axePartition ] - p_node->_aabb.getMin()[ axePartition ];
+			uint  idPartition  = std::partition( p_lastTriangleId, p_lastTriangleId, "lambda" );
+		}
 		/// TODO
 	}
 
