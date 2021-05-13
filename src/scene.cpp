@@ -107,12 +107,14 @@ namespace RT_ISICG
 		_addMaterial( new MatteMaterial( " MagentaMatte ", MAGENTA, 0.6f ) );
 		_addMaterial( new MatteMaterial( " YellowMatte ", YELLOW, 0.6f ) );
 		_addMaterial( new MatteMaterial( " CyanMatte ", CYAN, 0.6f ) );
+		_addMaterial( new TransparentMaterial( "Transparent" ) );
 		// ================================================================
 		// Add objects .
 		// ================================================================
 		// OBJ.
 		loadFileTriangleMesh( "UVsphere", DATA_PATH + "bunny.obj" );
-		_attachMaterialToObject( " CyanMatte ", "UVsphere_defaultobject" );
+		
+		_attachMaterialToObject( "Transparent", "UVsphere_defaultobject" );
 		// Pseudo Cornell box made with infinite planes .
 		_addObject( new Plane( " PlaneGround ", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 		_attachMaterialToObject( " GreyMatte ", " PlaneGround " );
@@ -164,6 +166,7 @@ namespace RT_ISICG
 				const aiFace & face = mesh->mFaces[ f ];
 				triMesh->addTriangle( face.mIndices[ 0 ], face.mIndices[ 1 ], face.mIndices[ 2 ] );
 			}
+			triMesh->buildBVH();
 			_addObject( triMesh );
 			const aiMaterial * const mtl = scene->mMaterials[ mesh->mMaterialIndex ];
 			if ( mtl == nullptr )
@@ -189,6 +192,7 @@ namespace RT_ISICG
 		}
 		std::cout << "[DONE] " << scene->mNumMeshes << " meshes, " << cptTriangles << " triangles, " << cptVertices
 				  << " vertices." << std::endl;
+		
 	}
 
 	bool Scene::intersect( const Ray & p_ray, const float p_tMin, const float p_tMax, HitRecord & p_hitRecord ) const

@@ -65,5 +65,21 @@ namespace RT_ISICG
 		return glm::normalize( vec );
 	}
 
+	float TriangleMeshGeometry::barycenter(uint axe) {
+		const float &  v0 = _refMesh->_vertices[ _v0 ][ axe ];
+		const float &  v1 = _refMesh->_vertices[ _v1 ][ axe ];
+		const float &  v2 = _refMesh->_vertices[ _v2 ][ axe ];
+
+		return ( v0 + v1 + v2 ) / 3.f;
+	}
+
+	std::vector<Vec3f> TriangleMeshGeometry::getVertices() {
+		std::vector<Vec3f> vertices;
+		vertices.push_back( _refMesh->_vertices[ _v0 ] );
+		vertices.push_back( _refMesh->_vertices[ _v1 ] );
+		vertices.push_back( _refMesh->_vertices[ _v2 ] );
+		return vertices;
+	}
+
 } // namespace RT_ISICG
  

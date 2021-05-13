@@ -2,6 +2,7 @@
 #define __RT_ISICG_TRIANGLE_GEOMETRY__
 
 #include "base_geometry.hpp"
+#include <vector>
 
 namespace RT_ISICG
 {
@@ -20,6 +21,10 @@ namespace RT_ISICG
 		inline const Vec3f & getFaceNormal() const { return _faceNormal; }
 
 		Vec3f interpolateNormal( Vec2f & uv ) const;
+
+		float barycenter( uint axe );
+
+		std::vector<Vec3f> getVertices();
 
 	  private:
 		MeshTriangle * _refMesh;

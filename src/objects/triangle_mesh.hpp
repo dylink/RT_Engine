@@ -5,6 +5,7 @@
 #include "geometry/triangle_mesh_geometry.hpp"
 #include <vector>
 #include "aabb.hpp"
+#include "bvh.hpp"
 
 namespace RT_ISICG
 {
@@ -44,11 +45,17 @@ namespace RT_ISICG
 		// Check for any intersection between p_tMin and p_tMax.
 		bool intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const override;
 
+		AABB getAABB() { return _aabb;
+		}
+
+		void buildBVH();
+
 	  private:
 		std::vector<Vec3f>				  _vertices;
 		std::vector<Vec3f>				  _normals;
 		std::vector<Vec2f>				  _uvs;
 		std::vector<TriangleMeshGeometry> _triangles;
+		BVH								  _bvh;
 		AABB							  _aabb;
 	};
 } // namespace RT_ISICG

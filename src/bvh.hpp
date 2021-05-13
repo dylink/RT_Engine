@@ -17,6 +17,13 @@ namespace RT_ISICG
 			delete _left;
 			delete _right;
 		}
+
+		BVHNode(AABB aabb, uint first, uint last) { 
+			_aabb = aabb;
+			_firstTriangleId = first;
+			_lastTriangleId	 = last;
+		}
+
 		bool isLeaf() const { return ( _left == nullptr && _right == nullptr ); }
 
 		AABB	  _aabb;
@@ -33,7 +40,7 @@ namespace RT_ISICG
 		~BVH() { delete _root; }
 
 		// Build the BVH from a list of triangles (call _buildRec).
-		void build( std::vector<TriangleMeshGeometry> * p_triangles );
+		void build( std::vector<TriangleMeshGeometry> * p_triangles, AABB aabb );
 
 		// Search for the nearest intersection with the ray (call _intersectRec).
 		bool intersect( const Ray & p_ray, const float p_tMin, const float p_tMax, HitRecord & p_hitRecord ) const;
@@ -41,7 +48,7 @@ namespace RT_ISICG
 		bool intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const;
 
 	  private:
-		void _buildRec( BVHNode * p_node, const uint p_firstTriangleId, const uint p_nbTriangles, const uint p_depth );
+		void _buildRec( BVHNode * p_node, const uint p_firstTriangleId );
 
 		bool _intersectRec( const BVHNode * p_node,
 							const Ray &		p_ray,
@@ -53,6 +60,8 @@ namespace RT_ISICG
 							   const Ray &	   p_ray,
 							   const float	   p_tMin,
 							   const float	   p_tMax ) const;
+
+		uint _partition( const uint axe, const float milieu, const uint firstID, const uint lastID );
 
 	  private:
 		std::vector<TriangleMeshGeometry> * _triangles = nullptr;

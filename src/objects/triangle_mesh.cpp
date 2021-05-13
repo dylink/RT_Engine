@@ -7,35 +7,12 @@ namespace RT_ISICG
 								  const float p_tMax,
 								  HitRecord & p_hitRecord ) const
 	{
-		if (_aabb.intersect(p_ray, p_tMin, p_tMax)) {
-			//return true;
-			Vec2f  uv;
-			float  tClosest = p_tMax;			 // Hit distance.
-			size_t hitTri	= _triangles.size(); // Hit triangle id.
-			Vec2f  uv2;
-			for ( size_t i = 0; i < _triangles.size(); i++ )
-			{
-				float t;
-				if ( _triangles[ i ].intersect( p_ray, t, uv ) )
-				{
-					if ( t >= p_tMin && t <= tClosest )
-					{
-						uv2		 = uv;
-						tClosest = t;
-						hitTri	 = i;
-					}
-				}
-			}
-			if ( hitTri != _triangles.size() ) // Intersection found.
-			{
-				p_hitRecord._point	= p_ray.pointAtT( tClosest );
-				p_hitRecord._normal = _triangles[ hitTri ].interpolateNormal( uv2 );
-				p_hitRecord.faceNormal( p_ray.getDirection() );
-				p_hitRecord._distance = tClosest;
-				p_hitRecord._object	  = this;
-
-				return true;
-			}
+		HitRecord hitRecord;
+		if ( _bvh.intersect( p_ray, p_tMin, p_tMax, hitRecord ) )
+		{
+			p_hitRecord			= hitRecord;
+			p_hitRecord._object = this;
+			return true;
 		}
 		
 		return false;
@@ -43,15 +20,13 @@ namespace RT_ISICG
 
 	bool MeshTriangle::intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const
 	{
-		Vec2f uv;
-		for ( size_t i = 0; i < _triangles.size(); i++ )
-		{
-			float t;
-			if ( _triangles[ i ].intersect( p_ray, t, uv ) )
-			{
-				if ( t >= p_tMin && t <= p_tMax ) return true; // No need to search for the nearest.
-			}
+		if (_bvh.intersectAny(p_ray, p_tMin, p_tMax)) { 
+			return true;
 		}
 		return false;
+	}
+
+	void MeshTriangle::buildBVH() { 
+		_bvh.build( &_triangles, _aabb );
 	}
 } // namespace RT_ISICG
