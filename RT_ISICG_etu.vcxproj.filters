@@ -113,6 +113,9 @@
     <ClCompile Include="src\objects\plane.cpp">
       <Filter>Source Files\objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\integrators\path_tracer_integrator.cpp">
+      <Filter>Source Files\integrators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\defines.hpp">
@@ -237,6 +240,9 @@
     </ClInclude>
     <ClInclude Include="src\geometry\plane_geometry.hpp">
       <Filter>Header Files\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\integrators\path_tracer_integrator.hpp">
+      <Filter>Header Files\integrators</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

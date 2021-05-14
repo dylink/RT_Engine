@@ -6,8 +6,8 @@ namespace RT_ISICG
 { 
 	int main( int argc, char ** argv )
 	{
-		const int imgWidth	= 600;
-		const int imgHeight = 400;
+		const int imgWidth	= 1920;
+		const int imgHeight = 1080;
 
 		// Create a texture to render the scene.
 		Texture img = Texture( imgWidth, imgHeight );
@@ -23,9 +23,9 @@ namespace RT_ISICG
 
 		// Create and setup the renderer.
 		Renderer renderer;
-		renderer.setIntegrator( IntegratorType::WHITTED );
-		renderer.setBackgroundColor( GREY );
-		//renderer.setNbPixelSamples( 32 );
+		renderer.setIntegrator( IntegratorType::PATH_TRACER );
+		renderer.setBackgroundColor( Vec3f( .5, .7, .9 ) );
+		renderer.setNbPixelSamples( 32 );
 
 		// Launch rendering.
 		std::cout << "Rendering..." << std::endl;

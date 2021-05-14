@@ -8,9 +8,9 @@ namespace RT_ISICG
 								  HitRecord & p_hitRecord ) const
 	{
 		HitRecord hitRecord;
-		if ( _bvh.intersect( p_ray, p_tMin, p_tMax, hitRecord ) )
+		if ( _bvh.intersect( p_ray, p_tMin, p_tMax, p_hitRecord ) )
 		{
-			p_hitRecord			= hitRecord;
+			//p_hitRecord			= hitRecord;
 			p_hitRecord._object = this;
 			return true;
 		}

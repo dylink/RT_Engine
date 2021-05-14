@@ -79,10 +79,11 @@ namespace RT_ISICG
 									 const int	   nbBounce,
 									 const bool	   isIn ) const
 	{
+		if ( nbBounce > _nbBounces ) { return BLACK; }
 		HitRecord hitRecord;
 		if ( p_scene.intersect( p_ray, p_tMin, p_tMax, hitRecord ) )
 		{
-			if ( nbBounce > _nbBounces ) { return BLACK; }
+			
 			Vec3f li = BLACK;
 			if ( hitRecord._object->getMaterial()->isMirror() )
 			{	
@@ -146,7 +147,7 @@ namespace RT_ISICG
 		}
 		else if ( nbBounce > 0 )
 		{
-			return BLACK;
+			return _backgroundColor;
 		}
 		else
 		{

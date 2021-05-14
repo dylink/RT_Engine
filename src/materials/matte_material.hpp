@@ -20,7 +20,8 @@ namespace RT_ISICG
 					 const HitRecord &	 p_hitRecord,
 					 const LightSample & p_lightSample ) const override
 		{
-			return _brdf.evaluate(-p_ray.getDirection(), p_hitRecord._normal, p_lightSample._direction);
+			return _brdf.evaluate( -p_ray.getDirection(), p_hitRecord._normal, p_lightSample._direction )
+				   * std::max( 0.0f, dot( p_lightSample._direction, p_hitRecord._normal ) );
 		}
 
 		inline const Vec3f & getFlatColor() const override { return _brdf.getKd(); }

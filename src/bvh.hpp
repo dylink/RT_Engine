@@ -48,7 +48,7 @@ namespace RT_ISICG
 		bool intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const;
 
 	  private:
-		void _buildRec( BVHNode * p_node, const uint p_firstTriangleId );
+		void _buildRec( BVHNode * p_node, const uint p_firstTriangleId, const uint p_lastTriangleId, const uint p_depth );
 
 		bool _intersectRec( const BVHNode * p_node,
 							const Ray &		p_ray,
@@ -61,7 +61,7 @@ namespace RT_ISICG
 							   const float	   p_tMin,
 							   const float	   p_tMax ) const;
 
-		uint _partition( const uint axe, const float milieu, const uint firstID, const uint lastID );
+		void _partition(BVHNode * node,  const uint axe, const float milieu, const uint firstID, const uint lastID );
 
 	  private:
 		std::vector<TriangleMeshGeometry> * _triangles = nullptr;

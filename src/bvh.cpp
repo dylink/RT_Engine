@@ -19,7 +19,7 @@ namespace RT_ISICG
 
 		/// TODO
 		_root = new BVHNode( aabb, 0, ( *_triangles ).size() );
-		_buildRec( _root, 0);
+		_buildRec( _root, 0, 0, (*_triangles).size());
 
 		chr.stop();
 
@@ -30,75 +30,59 @@ namespace RT_ISICG
 	{
 		/// TODO
 
-		if ( _intersectRec( _root, p_ray, p_tMin, p_tMax, p_hitRecord ) ) return true;
-		return false;
+		return _intersectRec( _root, p_ray, p_tMin, p_tMax, p_hitRecord );
 	}
 
 	bool BVH::intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const
 	{
 
-		if ( _intersectAnyRec( _root, p_ray, p_tMin, p_tMax ) ) return true;
+		return _intersectAnyRec( _root, p_ray, p_tMin, p_tMax );
 		/// TODO
-		return false;
 	}
 
-	uint BVH::_partition(const uint axe, const float milieu, const uint firstID, const uint lastID) {
-		uint ind = 0;
-		
-		for ( uint i = firstID;  i< lastID; i++)
+	void BVH::_partition(BVHNode * p_node, const uint axe, const float milieu, const uint firstID, const uint lastID) {
+		AABB			   aabbLeft, aabbRight;
+		uint			   i = firstID;
+		uint			   j = lastID - 1;
+		for (;i<=j;)
 		{
-			//std::cout << i << " == " << milieu << " && " << ( *_triangles )[ i ].barycenter( axe ) << "\n";
-			if ( (*_triangles)[i].barycenter(axe) > milieu ) {
-
-				return ind;
-			}
-			ind++;
-		}
-		return ind;
-	}
-
-	void BVH::_buildRec( BVHNode *	p_node,
-						 const uint p_depth )
-	{
-
-		if ( p_depth == _maxDepth || p_node->_lastTriangleId - p_node->_firstTriangleId < _maxTrianglesPerLeaf ) return;
-
-		uint axis	 = p_node->_aabb.largestAxis();
-		const float	 axisVal = p_node->_aabb.centroid()[ axis ];
-
-		AABB	aabbLeft, aabbRight;
-		uint			   nextIdLeft  = p_node->_firstTriangleId;
-		uint	nextIdRight = p_node->_lastTriangleId -1;
-		std::vector<Vec3f> _vertices;
-		while ( nextIdLeft <= nextIdRight )
-		{
-			_vertices = ( *_triangles )[ nextIdLeft ].getVertices();
-			if ( ( *_triangles )[ nextIdLeft ].barycenter( axis ) < axisVal )
+			std::vector<Vec3f> _vertices = ( *_triangles )[ i ].getVertices();
+			if ( ( *_triangles )[ i ].barycenter( axe ) < milieu )
 			{
 				aabbLeft.extend( _vertices[ 0 ] );
 				aabbLeft.extend( _vertices[ 1 ] );
 				aabbLeft.extend( _vertices[ 2 ] );
-				nextIdLeft++;
+				i++;
+				continue;
 			}
-			else
-			{
-				aabbRight.extend( _vertices[ 0 ] );
-				aabbRight.extend( _vertices[ 1 ] );
-				aabbRight.extend( _vertices[ 2 ] );
-				TriangleMeshGeometry tmpSwap   = ( *_triangles )[ nextIdRight ];
-				( *_triangles )[ nextIdRight ] = ( *_triangles )[ nextIdLeft ];
-				( *_triangles )[ nextIdLeft ]  = tmpSwap;
-				nextIdRight--;
-			}
+			aabbRight.extend( _vertices[ 0 ] );
+			aabbRight.extend( _vertices[ 1 ] );
+			aabbRight.extend( _vertices[ 2 ] );
+			std::iter_swap( ( *_triangles ).begin() + i, ( *_triangles ).begin() + j );
+			j--;
 		}
 
+		p_node->_left  = new BVHNode( aabbLeft, firstID, i );
+		p_node->_right = new BVHNode( aabbRight, i, lastID );
+	}
 
-		//std::cout << p_node->_firstTriangleId << " && " << p_node->_lastTriangleId << std::endl;
-		p_node->_left  = new BVHNode( aabbLeft, p_node->_firstTriangleId, nextIdLeft );
-		p_node->_right = new BVHNode( aabbRight, nextIdLeft, p_node->_lastTriangleId );
+	void BVH::_buildRec( BVHNode *	p_node,
+						 const uint p_depth, uint a, uint b )
+	{
 
-		_buildRec( p_node->_left, p_depth + 1 );
-		_buildRec( p_node->_right, p_depth + 1 );
+		if ( p_depth == _maxDepth || b - a < _maxTrianglesPerLeaf ) return;
+
+		uint axe	 = p_node->_aabb.largestAxis();
+		const float	 axisVal = p_node->_aabb.centroid()[ axe ];
+
+		const float longueur = ( p_node->_aabb.getMax()[ axe ] - p_node->_aabb.getMin()[ axe ] );
+
+
+
+		_partition( p_node, axe, axisVal, a, b );
+
+		_buildRec( p_node->_left, p_depth + 1, a, p_node->_left->_lastTriangleId );
+		_buildRec( p_node->_right, p_depth + 1, p_node->_left->_lastTriangleId, b );
 		/// TODO
 	}
 
@@ -136,7 +120,6 @@ namespace RT_ISICG
 					p_hitRecord._normal = ( *_triangles )[ hitTri ].interpolateNormal( uv2 );
 					p_hitRecord.faceNormal( p_ray.getDirection() );
 					p_hitRecord._distance = tClosest;
-					p_hitRecord._object	  = nullptr;
 
 					return true;
 				}
@@ -144,24 +127,25 @@ namespace RT_ISICG
 			}
 			else
 			{
-				HitRecord  hitLeft;
-				const bool intersectLeft = _intersectRec( p_node->_left, p_ray, p_tMin, p_tMax, hitLeft );
-				HitRecord  hitRight;
-				const bool intersectRight = _intersectRec( p_node->_right, p_ray, p_tMin, p_tMax, hitRight );
+				HitRecord  left;
+				HitRecord right;
+				bool left_b = _intersectRec( p_node->_left, p_ray, p_tMin, p_tMax, left );
+				
+				bool right_b = _intersectRec( p_node->_right, p_ray, p_tMin, p_tMax, right );
 
-				if ( intersectLeft && intersectRight )
+				if ( left_b && right_b )
 				{
-					p_hitRecord = ( hitLeft._distance < hitRight._distance ? hitLeft : hitRight );
+					p_hitRecord = ( left._distance < right._distance ? left : right );
 					return true;
 				}
-				else if ( intersectLeft )
+				else if ( left_b )
 				{
-					p_hitRecord = hitLeft;
+					p_hitRecord = left;
 					return true;
 				}
-				else if ( intersectRight )
+				else if ( right_b )
 				{
-					p_hitRecord = hitRight;
+					p_hitRecord = right;
 					return true;
 				}
 			}
