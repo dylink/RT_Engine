@@ -27,7 +27,7 @@ namespace RT_ISICG
 		Renderer renderer;
 		renderer.setIntegrator( IntegratorType::PATH_TRACER);
 		renderer.setBackgroundColor( Vec3f( 0.00, 0.40, 0.60 ) );
-		renderer.setNbPixelSamples( 18 );
+		renderer.setNbPixelSamples( 256 );
 
 		// Launch rendering.
 		std::cout << "Rendering..." << std::endl;
