@@ -27,6 +27,7 @@ namespace RT_ISICG
 	}
 
 	void MeshTriangle::buildBVH() { 
+		std::cout << _vertices[ 0 ][ 0 ] << " && " << _triangles[ 0 ].getVertices()[ 0 ][ 0 ] << std::endl;
 		_bvh.build( &_triangles, _aabb );
 	}
 } // namespace RT_ISICG

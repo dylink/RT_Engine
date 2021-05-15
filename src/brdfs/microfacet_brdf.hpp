@@ -1,6 +1,6 @@
 #ifndef __RT_ISICG_BRDF_MICROFACET__
 #define __RT_ISICG_BRDF_MICROFACET__
-#include "cstdio";
+#include "cstdio"
 #include "defines.hpp"
 
 #define G(x) (x/
@@ -15,7 +15,7 @@ namespace RT_ISICG
 		};
 
 		inline float g1( const float & x ) const { 
-			float _k = pow( _pente + 1, 2 ) / 8;
+			float _k = pow( _pente + 1.f, 2.f ) / 8.f;
 			return x / ( x * ( 1 - _k ) + _k );
 		}
 
@@ -30,9 +30,9 @@ namespace RT_ISICG
 		}
 
 		inline float d( const Vec3f & h, const Vec3f & normal ) const { 
-			float a = pow( _pente, 2 );
+			float a = pow( _pente, 2.f );
 			float nH = dot( normal, h );
-			return pow( a, 2 ) / ( PIf * pow( ( pow( nH, 2 ) * ( pow( a, 2 ) - 1 ) + 1 ), 2 ) );
+			return pow( a, 2.f ) / ( PIf * pow( ( pow( nH, 2.f ) * ( pow( a, 2.f ) - 1.f ) + 1.f ), 2.f ) );
 		}
 
 

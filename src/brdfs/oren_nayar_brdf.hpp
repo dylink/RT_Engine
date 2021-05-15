@@ -9,8 +9,8 @@ namespace RT_ISICG
 	{
 	  public:
 		OrenNayarBRDF( const Vec3f & p_kd, const float & p_pente ) : _kd( p_kd ), _pente (p_pente) {
-			_a		= 1 - 0.5 * ( glm::pow( _pente, 2.f ) / ( glm::pow( _pente, 2.f ) + 0.33 ) );
-			_b      = 0.45 * ( glm::pow( _pente, 2.f ) / ( glm::pow( _pente, 2.f ) + 0.09 ) );
+			_a		= 1.f - 0.5f * ( glm::pow( _pente, 2.f ) / ( glm::pow( _pente, 2.f ) + 0.33f ) );
+			_b      = 0.45f * ( glm::pow( _pente, 2.f ) / ( glm::pow( _pente, 2.f ) + 0.09f ) );
 		};
 
 		// * INV_PIf : could be done in the constructor...

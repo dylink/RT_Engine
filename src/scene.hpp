@@ -28,7 +28,7 @@ namespace RT_ISICG
 		// Initialization from file.
 		void init( const std::string & p_path ) { throw std::exception( "Not implemented !" ); }
 
-		void loadFileTriangleMesh( const std::string & p_name, const std::string & p_path );
+		void loadFileTriangleMesh( const std::string & p_name, const std::string & p_path, float size, Vec3f position );
 
 		const LightList & getLights() const { return _lightList; }
 

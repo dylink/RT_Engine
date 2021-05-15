@@ -41,8 +41,6 @@ int tracerBounces,
 			}
 			if ( hitRecord._object->getMaterial()->isTransparent() )
 			{
-				// if ( nbBounce > _nbBounces ) { return BLACK; }
-				//float kr  = 0.f;
 				float ior = 0.f;
 				float n1  = 0.f;
 				float n2  = 0.f;
@@ -59,7 +57,7 @@ int tracerBounces,
 				refract.offset( -hitRecord._normal );
 				Vec3f refractedColor
 					= ( direction2 == BLACK ) ? BLACK : recurs( p_scene, refract, p_tMin, p_tMax, tracerBounces, nbBounce + 1, !isIn );
-				// Vec3f refractedColor = recurs( p_scene, refract, p_tMin, p_tMax, nbBounce + 1, !isIn );
+
 				float cosThetaI = glm::dot( p_ray.getDirection(), hitRecord._normal );
 				float cosThetaT = glm::dot( direction2, hitRecord._normal );
 				float rS		= pow( ( n1 * cosThetaI - n2 * cosThetaT ) / ( n1 * cosThetaI + n2 * cosThetaT ), 2.f );
@@ -85,19 +83,24 @@ int tracerBounces,
 
 
 			}
-			Vec3f ulContrib = BLACK;
-			Vec3f vecx, vecz;
-			// std::cout << tracerBounces << std::endl;
-			coordonneesHemisphere( hitRecord._normal, vecx, vecz );
-			float r1 = randomFloat();
-			float r2 = randomFloat();
+			li += hitRecord._object->getMaterial()->emission();
+			if (!hitRecord._object->getMaterial()->isTransparent()) {
+				Vec3f vecx, vecz;
+				// std::cout << tracerBounces << std::endl;
+				coordonneesHemisphere( hitRecord._normal, vecx, vecz );
+				float r1 = randomFloat();
+				float r2 = randomFloat();
 
-			Vec3f sampleDir		   = rayonAleatoire( r1, r2 );
-			Vec3f sampleImageSpace = sampleDir.x * vecx + sampleDir.y * hitRecord._normal + sampleDir.z * vecz;
+				Vec3f sampleDir		   = rayonAleatoire( r1, r2 );
+				Vec3f sampleImageSpace = sampleDir.x * vecx + sampleDir.y * hitRecord._normal + sampleDir.z * vecz;
 
-			Ray tracer( hitRecord._point, sampleImageSpace );
-			tracer.offset( hitRecord._normal );
-			li += recurs( p_scene, tracer, p_tMin, p_tMax, tracerBounces + 1, nbBounce, isIn ) * hitRecord._object->getMaterial()->getFlatColor();
+				Ray tracer( hitRecord._point, sampleImageSpace );
+				tracer.offset( hitRecord._normal );
+				li += recurs( p_scene, tracer, p_tMin, p_tMax, tracerBounces + 1, nbBounce, isIn )
+						  * hitRecord._object->getMaterial()->getFlatColor();
+
+			}
+			
 			/// TODO ! cos theta...
 			return li;
 		}

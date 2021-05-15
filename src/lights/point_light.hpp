@@ -33,4 +33,4 @@ namespace RT_ISICG
 
 } // namespace RT_ISICG
 
-#endif // __RT_ISICG_QUAD_LIGHT__
+#endif // __RT_ISICG_POINT_LIGHT__

@@ -21,11 +21,13 @@ namespace RT_ISICG
 		PerspectiveCamera camera(
 			Vec3f( 0, 2, -6 ), Vec3f( 0, 2, 1 ), Vec3f( 0., 1., 0. ), 60.f, float( imgWidth ) / imgHeight );
 
+		//PerspectiveCamera camera(Vec3f( -0.9, 0.4, 0.9 ), Vec3f( -0.87, 0.4, 1 ), Vec3f( 0., 1., 0. ), 60.f, float( imgWidth ) / imgHeight );
+
 		// Create and setup the renderer.
 		Renderer renderer;
-		renderer.setIntegrator( IntegratorType::PATH_TRACER );
-		renderer.setBackgroundColor( Vec3f( .5, .7, .9 ) );
-		renderer.setNbPixelSamples( 32 );
+		renderer.setIntegrator( IntegratorType::WHITTED);
+		renderer.setBackgroundColor( Vec3f( 0.00, 0.40, 0.60 ) );
+		renderer.setNbPixelSamples( 64 );
 
 		// Launch rendering.
 		std::cout << "Rendering..." << std::endl;

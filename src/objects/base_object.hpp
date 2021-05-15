@@ -19,7 +19,7 @@ namespace RT_ISICG
 
 		virtual inline BaseMaterial * getMaterial() const final { return _material; }
 		virtual inline void			  setMaterial( BaseMaterial * p_material ) final { _material = p_material; }
-
+		
 		// Check for nearest intersection: if found fill p_hitRecord.
 		virtual bool intersect( const Ray & p_ray,
 								const float p_tMin,

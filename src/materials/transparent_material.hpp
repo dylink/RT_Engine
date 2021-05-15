@@ -11,7 +11,7 @@ namespace RT_ISICG
 		TransparentMaterial( const std::string & p_name ) : BaseMaterial( p_name )
 		{
 			_isTransparent = true;
-			_ior		   = 1.3;
+			_ior		   = 1.3f;
 		}
 
 		virtual ~TransparentMaterial() = default;

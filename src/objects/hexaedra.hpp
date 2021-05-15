@@ -1,19 +1,19 @@
-#ifndef __RT_ISICG_SPHERE__
-#define __RT_ISICG_SPHERE__
+#ifndef __RT_ISICG_HEXAEDRA__
+#define __RT_ISICG_HEXAEDRA__
 
 #include "base_object.hpp"
-#include "geometry/sphere_geometry.hpp"
+#include "geometry/hexaedra_geometry.hpp"
 
 namespace RT_ISICG
 {
-	class Sphere : public BaseObject
+	class Hexaedra : public BaseObject
 	{
 	  public:
-		Sphere()		  = delete;
-		virtual ~Sphere() = default;
+		Hexaedra()		  = delete;
+		virtual ~Hexaedra() = default;
 
-		Sphere( const std::string & p_name, const Vec3f & p_center, const float p_radius )
-			: BaseObject( p_name ), _geometry( p_center, p_radius )
+		Hexaedra( const std::string & p_name, const Vec3f & p_size, const Vec3f & p_position )
+			: BaseObject( p_name ), _geometry( p_size, p_position )
 		{
 		}
 
@@ -25,11 +25,10 @@ namespace RT_ISICG
 
 		bool intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const override;
 
-
 	  private:
-		SphereGeometry _geometry;
+		HexaedraGeometry _geometry;
 	};
 
 } // namespace RT_ISICG
 
-#endif // __RT_ISICG_SPHERE__
+#endif // __RT_ISICG_HEXAEDRA__

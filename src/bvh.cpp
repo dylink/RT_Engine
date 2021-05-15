@@ -67,22 +67,22 @@ namespace RT_ISICG
 	}
 
 	void BVH::_buildRec( BVHNode *	p_node,
-						 const uint p_depth, uint a, uint b )
+						 const uint p_depth, const uint p_firstTriangleId, const uint p_lastTriangleId )
 	{
 
-		if ( p_depth == _maxDepth || b - a < _maxTrianglesPerLeaf ) return;
+		if ( p_depth == _maxDepth || p_lastTriangleId - p_firstTriangleId < _maxTrianglesPerLeaf ) return;
 
 		uint axe	 = p_node->_aabb.largestAxis();
-		const float	 axisVal = p_node->_aabb.centroid()[ axe ];
+		const float	 milieu = p_node->_aabb.centroid()[ axe ];
 
 		const float longueur = ( p_node->_aabb.getMax()[ axe ] - p_node->_aabb.getMin()[ axe ] );
 
 
 
-		_partition( p_node, axe, axisVal, a, b );
+		_partition( p_node, axe, milieu, p_firstTriangleId, p_lastTriangleId );
 
-		_buildRec( p_node->_left, p_depth + 1, a, p_node->_left->_lastTriangleId );
-		_buildRec( p_node->_right, p_depth + 1, p_node->_left->_lastTriangleId, b );
+		_buildRec( p_node->_left, p_depth + 1, p_firstTriangleId, p_node->_left->_lastTriangleId );
+		_buildRec( p_node->_right, p_depth + 1, p_node->_right->_firstTriangleId, p_lastTriangleId );
 		/// TODO
 	}
 

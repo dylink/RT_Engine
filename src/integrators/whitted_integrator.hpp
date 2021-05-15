@@ -23,7 +23,7 @@ namespace RT_ISICG
 					  const int		nbBounce,
 					  const bool	isIn ) const;
 	  private:
-		float _nbLightSamples = 32;
+		float _nbLightSamples = 64;
 		int _nbBounces = 5;
 	};
 

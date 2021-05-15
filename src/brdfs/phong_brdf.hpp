@@ -15,8 +15,9 @@ namespace RT_ISICG
 		{
 			const float cosA = glm::dot( wO, glm::reflect( -wI, normal ) );
 			Vec3f		h	  = glm::normalize( wO + wI );
-			const float cosA2 = glm::dot( normal, h );
-			return _ks * pow(cosA2, _coeff);
+			const float cosA2 = glm::max(glm::dot( normal, h ), 0.f);
+
+			return _ks * (float)pow(cosA2, _coeff);
 		}
 
 		inline const Vec3f & getKs() const { return _ks; }

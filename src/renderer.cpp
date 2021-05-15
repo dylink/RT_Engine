@@ -5,6 +5,7 @@
 #include "integrators/path_tracer_integrator.hpp"
 #include "utils/console_progress_bar.hpp"
 #include "utils/random.hpp"
+#include <cmath>
 
 namespace RT_ISICG
 {
@@ -73,7 +74,8 @@ namespace RT_ISICG
 				else
 				{
 					Ray ray = p_camera->generateRay( (float)i / (width-1), (float)j / (height-1) );
-					p_texture.setPixel( i, j, glm::clamp(_integrator->Li( p_scene, ray, 0, 50000 ), 0.f, 1.f) );
+					
+					p_texture.setPixel( i, j, glm::clamp( _integrator->Li( p_scene, ray, 0, 50000 ), 0.f, 1.f ) );
 				}
 				
 

@@ -116,6 +116,12 @@
     <ClCompile Include="src\integrators\path_tracer_integrator.cpp">
       <Filter>Source Files\integrators</Filter>
     </ClCompile>
+    <ClCompile Include="src\geometry\hexaedra_geometry.cpp">
+      <Filter>Source Files\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\heaxedra.cpp">
+      <Filter>Source Files\objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\defines.hpp">
@@ -244,5 +250,19 @@
     <ClInclude Include="src\integrators\path_tracer_integrator.hpp">
       <Filter>Header Files\integrators</Filter>
     </ClInclude>
+    <ClInclude Include="src\lights\spherical_light.hpp">
+      <Filter>Header Files\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\hexaedra_geometry.hpp">
+      <Filter>Header Files\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\hexaedra.hpp">
+      <Filter>Header Files\objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\materials\glowing_material.hpp">
+      <Filter>Header Files\materials</Filter>
+    </None>
   </ItemGroup>
 </Project>

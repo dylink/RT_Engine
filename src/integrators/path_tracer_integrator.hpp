@@ -27,9 +27,12 @@ namespace RT_ISICG
 		void coordonneesHemisphere( Vec3f & normale, Vec3f & vecx, Vec3f & vecz ) const;
 
 		Vec3f rayonAleatoire( float r1, float r2 ) const;
+
+		void setNbBounces( int nb ) { _maxBounces = nb; }
+		
 	  private:
 		int	  _nbBounces	  = 5;
-		int	  _maxBounces	  = 1;
+		int	  _maxBounces	  = 3;
 	};
 
 } // namespace RT_ISICG

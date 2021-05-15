@@ -30,6 +30,7 @@ namespace RT_ISICG
 			_aabb.extend(Vec3f(p_x, p_y, p_z));
 			_vertices.emplace_back( p_x, p_y, p_z );
 		}
+
 		inline void addNormal( const float p_x, const float p_y, const float p_z )
 		{
 			_normals.emplace_back( p_x, p_y, p_z );

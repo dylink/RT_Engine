@@ -28,11 +28,16 @@ namespace RT_ISICG
 
 		inline const float & getIOR() const { return _ior; }
 
+		virtual Vec3f emission() const { return _emissive; };
+
+		virtual void setEmissive( Vec3f color, float power ) { _emissive = color * power; };
+
 	  protected:
 		std::string _name;
 		bool		_isMirror = false;
 		bool		_isTransparent = false;
 		float		_ior		   = 1;
+		Vec3f		_emissive	   = BLACK;
 	};
 
 } // namespace RT_ISICG
